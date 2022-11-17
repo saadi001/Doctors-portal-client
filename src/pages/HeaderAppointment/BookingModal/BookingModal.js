@@ -1,15 +1,40 @@
+import { format } from 'date-fns';
 import React from 'react';
 
-const BookingModal = ({treatment}) => {
-     const {name} = treatment;
+const BookingModal = ({ treatment, selectedDate }) => {
+     const { name, slots } = treatment;
+     const date = format(selectedDate, 'PP');
+
+     const handleBooking = event => {
+          event.preventDefault()
+          const form = event.target;
+          const name = form.name.value;
+          const email = form.email.value;
+          const slot = form.slot.value;
+          const phone = form.phone.value;
+
+          console.log(name, email, slot, phone)
+     }
      return (
           <div>
                <input type="checkbox" id="booking-modal" className="modal-toggle" />
                <div className="modal">
                     <div className="modal-box relative">
                          <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                         <h3 className="text-lg font-bold">{name}</h3>
-                         <p className="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+                         <h3 className="text-lg font-bold mb-3">{name}</h3>
+                         <form onSubmit={handleBooking} className='flex flex-col gap-3'>
+                              <input type="text" defaultValue={date} className="input input-bordered w-full" disabled />
+                              <select name='slot' className="select select-bordered w-full">
+                                   
+                                   {
+                                        slots.map(slot => <option value={slot}>{slot}</option>)
+                                   }
+                              </select>
+                              <input name='name' type="text" placeholder="name" className="input input-bordered w-full" />
+                              <input name='email' type="email" placeholder="email adress" className="input input-bordered w-full" />
+                              <input name='phone' type="text" placeholder="phone number" className="input input-bordered w-full" />
+                              <input type="submit" className="btn w-full bg-accent" />
+                         </form>
                     </div>
                </div>
           </div>
