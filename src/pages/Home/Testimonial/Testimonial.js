@@ -23,7 +23,7 @@ const Testimonial = () => {
                img: people2
           },
           {
-               id: 1,
+               id: 3,
                name: "Winson Herry",
                location: "California",
                review: "It is a long established fact that by the readable content of a lot layout. The point of using Lorem a more-or-less normal distribu to using Content here, content",

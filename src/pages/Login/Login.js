@@ -14,7 +14,6 @@ const Login = () => {
                <h3 className='text-2xl font-bold text-center'>Login</h3>
                <form onSubmit={handleSubmit(handleLogin)} className='px-6'>
 
-
                     <div className="form-control w-full">
                          <label className="label"><span className="label-text">Email</span></label>
                          <input type="email" {...register("email",{required:"Email is required"})} className="input input-bordered w-full" />
@@ -23,10 +22,11 @@ const Login = () => {
 
                     <div className="form-control w-full">
                          <label className="label"><span className="label-text">Password</span></label>
-                         <input type="password" {...register("password",{required: "Please provide a password"})} className="input input-bordered w-full" />
+                         <input type="password" {...register("password",{required: "password required", minLength:{value:6, message:'password should be 6 character or longer.'}})} className="input input-bordered w-full" />
                          {errors.password && <p className='text-red-500 mt-1 text-xs'>{errors.password?.message}</p>}
                          <label className="text-[10px] my-1"><span >Forget password?</span></label>
                     </div>
+                    
                     <div className='form-control mt-4'>
                          <input type="submit" value='Login' className='btn bg-accent' />
                     </div>
