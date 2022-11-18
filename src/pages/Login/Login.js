@@ -1,13 +1,34 @@
-import React, {  } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider';
 
 const Login = () => {
      const { register, formState: { errors }, handleSubmit } = useForm();
-     // const [data, setData] = useState("");
+     const {signIn} = useContext(AuthContext)
+     const [LoginError, setLoginError] = useState("");
+     const location = useLocation()
+     const navigate = useNavigate()
+
+     const from = location.state?.from?.pathname || '/';
 
      const handleLogin = (data) =>{
           console.log(data)
+          signIn(data.email, data.password)
+          .then(result => {
+               const user = result.user;
+               console.log(user)
+               setLoginError('')
+               navigate(from, {replace: true})
+
+          })
+          .catch(error =>{
+               console.log(error.message)
+               // setLoginError(error.message)
+               const err = error.message;
+               const errorMessage = err.split('/')
+               setLoginError(errorMessage[1])
+          })
      }
      return (
           <div className='max-w-md mx-auto border py-4 rounded-md shadow-xl my-5'>
@@ -24,6 +45,7 @@ const Login = () => {
                          <label className="label"><span className="label-text">Password</span></label>
                          <input type="password" {...register("password",{required: "password required", minLength:{value:6, message:'password should be 6 character or longer.'}})} className="input input-bordered w-full" />
                          {errors.password && <p className='text-red-500 mt-1 text-xs'>{errors.password?.message}</p>}
+                         {LoginError && <p className='text-red-500 text-sm mt-1'>{LoginError}</p>}
                          <label className="text-[10px] my-1"><span >Forget password?</span></label>
                     </div>
                     

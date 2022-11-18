@@ -1,12 +1,38 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import  { AuthContext } from '../../Contexts/AuthProvider';
 
 const SignUp = () => {
      const {register, handleSubmit, formState:{errors}} = useForm();
+     const {createUser, updateuser} = useContext(AuthContext)
+     const [signupError, setSignupError] = useState('');
 
      const handleSignup = data =>{
-          console.log(data)
+          
+          createUser(data.email, data.password)
+          .then(result =>{
+               const user = result.user;
+               console.log(user)
+               toast.success('sign up successfully')
+               setSignupError('')
+               const userInfo = {
+                    displayName: data.name
+               }
+               updateuser(userInfo)
+               .then(()=>{})
+               .catch(error => console.error(error))
+          })
+          .catch(error =>{
+               console.error(error)
+               const err = error.message;
+               const CuttingErrorMessage = err.split('/')
+               const errorMessage = (CuttingErrorMessage[1])
+               const removeLastChar = errorMessage.slice(0,-1);
+               const removeLastTwoChar = removeLastChar.slice(0,-1);
+               setSignupError(removeLastTwoChar) 
+          })
      }
      return (
           <div className='max-w-md mx-auto border py-4 rounded-md shadow-xl my-5'>
@@ -31,9 +57,10 @@ const SignUp = () => {
                          <input type="password" {...register('password',{
                               required: "This field is required",
                               minLength: {value: 6, message: "password must be 6 character or longer"},
-                              pattern: {value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])$/, message: "password must be stronger."}
+                              // pattern: {value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])$/, message: "password must be stronger."}
                          })} className="input input-bordered w-full" />
                          {errors.password && <p role='alert' className='text-sm text-red-500 mt-1'>{errors.password.message}</p>}
+                         {signupError && <p className='text-red-500 text-sm mt-1'>{signupError}</p>}
                
                     </div>
                     
