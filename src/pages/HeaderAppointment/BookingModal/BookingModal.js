@@ -1,8 +1,11 @@
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
+import { AuthContext } from '../../../Contexts/AuthProvider';
 
-const BookingModal = ({ treatment,setTreatment, selectedDate }) => {
+const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
      const { name, slots } = treatment;
+     const { user } = useContext(AuthContext);
      const date = format(selectedDate, 'PP');
 
      const handleBooking = event => {
@@ -23,8 +26,29 @@ const BookingModal = ({ treatment,setTreatment, selectedDate }) => {
 
           }
 
-          console.log(booking)
-          setTreatment(null)
+          fetch('http://localhost:5000/bookings', {
+               method: 'POST',
+               headers: {
+                    'content-type': 'application/json'
+               },
+               body: JSON.stringify(booking)
+          })
+               .then(res => res.json())
+               .then(data => {
+                    console.log(data)
+                    if (data.acknowledged) {
+                         setTreatment(null)
+                         toast.success('booking confirmed.')
+                         refetch()
+                    }
+                    else{
+                         toast.error(data.message)
+                    }
+
+               })
+
+          
+
      }
      return (
           <div>
@@ -36,15 +60,15 @@ const BookingModal = ({ treatment,setTreatment, selectedDate }) => {
                          <form onSubmit={handleBooking} className='flex flex-col gap-3'>
                               <input type="text" defaultValue={date} className="input input-bordered w-full" disabled />
                               <select name='slot' className="select select-bordered w-full">
-                                   
+
                                    {
                                         slots.map((slot, i) => <option key={i} value={slot}>{slot}</option>)
                                    }
                               </select>
-                              <input name='name' type="text" placeholder="name" className="input input-bordered w-full" />
-                              <input name='email' type="email" placeholder="email adress" className="input input-bordered w-full" />
-                              <input name='phone' type="text" placeholder="phone number" className="input input-bordered w-full" />
-                              <input type="submit" className="btn w-full bg-accent" />
+                              <input name='name' type="text" defaultValue={user?.displayName} className="input input-bordered w-full" />
+                              <input name='email' type="email" defaultValue={user?.email} disabled className="input input-bordered w-full" />
+                              <input name='phone' type="text" placeholder="phone number" className="input input-bordered w-full" required/>
+                              <input type="submit" value='Book' className="btn w-full bg-accent" />
                          </form>
                     </div>
                </div>
