@@ -3,12 +3,19 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import  { AuthContext } from '../../Contexts/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
      const {register, handleSubmit, formState:{errors}} = useForm();
      const {createUser, updateuser} = useContext(AuthContext)
      const [signupError, setSignupError] = useState('');
+     const [createdUserEmail, setCreatedUserEmail] = useState('')
+     const [token, setToken] = useToken(createdUserEmail)
      const navigate = useNavigate();
+
+     if(token){
+          navigate('/')
+     }
 
      const handleSignup = data =>{
           
@@ -33,8 +40,8 @@ const SignUp = () => {
                const CuttingErrorMessage = err.split('/')
                const errorMessage = (CuttingErrorMessage[1])
                const removeLastChar = errorMessage.slice(0,-1);
-               const removeLastTwoChar = removeLastChar.slice(0,-1);
-               setSignupError(removeLastTwoChar) 
+               const removeSecondLastChar = removeLastChar.slice(0,-1);
+               setSignupError(removeSecondLastChar) 
           })
      }
 
@@ -50,10 +57,12 @@ const SignUp = () => {
           })
           .then(res => res.json())
           .then(data => {
-               navigate('/');
-               console.log(data)
+               
+               setCreatedUserEmail(email)
           })
      }
+
+     
      return (
           <div className='max-w-md mx-auto border py-4 rounded-md shadow-xl my-5'>
                <h3 className='text-2xl font-bold text-center'>Sign up</h3>
