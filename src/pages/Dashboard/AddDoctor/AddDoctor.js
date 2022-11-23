@@ -1,10 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import Loading from '../../Loading/Loading';
 
 const AddDoctor = () => {
      const { register, handleSubmit, formState: { errors } } = useForm();
+
+     const imgaeHostKey = process.env.REACT_APP_imageHostingKey;
+     const navigate = useNavigate();
 
      const {data:addDoctor, isLoading} = useQuery({
           queryKey:['addDoctor'],
@@ -20,7 +25,43 @@ const AddDoctor = () => {
      }
 
      const handleAddDoctor = data => {
-          console.log(data)
+          
+          const image = data.img[0];
+          const formData = new FormData();
+          formData.append('image', image)
+          const url = `https://api.imgbb.com/1/upload?key=${imgaeHostKey}`
+          fetch(url,{
+               method: 'POST',
+               body: formData
+          })
+          .then(res => res.json())
+          .then(imgData => {
+               console.log(imgData)
+               if(imgData.success){
+                    console.log(imgData.data.url)
+                    const doctor = {
+                         name:data.name,
+                         email: data.email,
+                         specialty: data.specialty,
+                         image: imgData.data.url
+                    }
+                    // save information to database
+                    fetch('http://localhost:5000/doctors', {
+                         method: 'POST',
+                         headers: {
+                              'content-type' : 'application/json',
+                              authorization: `bearer ${localStorage.getItem('accessToken')}`
+                         },
+                         body:JSON.stringify(doctor)
+                    })
+                    .then(res => res.json())
+                    .then(result => {
+                         console.log(result)
+                         toast.success(`${data.name} added successfully`)
+                         navigate('/dashboard/managedoctors')
+                    })
+               }
+          })
      }
      return (
           <div className=' max-w-md '>

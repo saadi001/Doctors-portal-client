@@ -3,6 +3,7 @@ import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import Main from "../../Layout/Main";
 import AddDoctor from "../../pages/Dashboard/AddDoctor/AddDoctor";
 import AllUsers from "../../pages/Dashboard/AllUsers/AllUsers";
+import ManageDoctors from "../../pages/Dashboard/ManageDoctors/ManageDoctors";
 import MyAppointment from "../../pages/Dashboard/MyAppointment/MyAppointment";
 import HeaderAppointment from "../../pages/HeaderAppointment/HeaderAppointment/HeaderAppointment";
 import Home from "../../pages/Home/Home/Home";
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
                {
                     path: '/dashboard/adddoctor',
                     element:<AdminRoute><AddDoctor></AddDoctor></AdminRoute>
+               },
+               {
+                    path: '/dashboard/managedoctors',
+                    element:<AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>
                },
           ]
      }
