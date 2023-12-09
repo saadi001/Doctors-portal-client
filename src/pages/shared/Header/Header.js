@@ -20,7 +20,7 @@ const Header = () => {
           {
                user?.uid ?
                     <>
-                         <li><Link to='/dashboard'>Dashboard</Link></li>
+                         {/* <li><Link to='/dashboard'>Dashboard</Link></li> */}
                          <li><button onClick={handleLogin}>Sign out</button></li>
                     </>
                     : <>

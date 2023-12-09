@@ -18,6 +18,7 @@ const Contact = () => {
                               <textarea className="textarea textarea-bordered h-24" placeholder="Your message"></textarea>                              
                          </div>
                     </form>
+                    <div className='flex justify-center mt-2'><button className="btn btn-primary text-white bg-gradient-to-r from-primary to-secondary">send</button></div>
                </div>
           </div>
      );
