@@ -1,26 +1,71 @@
 import React from 'react';
-import bg from '../../../assets/images/appointment.png'
 
 const Contact = () => {
      return (
-          <div style={{backgroundImage: `url(${bg})`}} className='mt-16 bg-cover bg-no-repeat'>
-               <div className='max-w-md mx-auto py-8'>
-                    <p className='text-xl font-bold text-center text-primary'>Contact Us</p>
-                    <h2 className='text-4xl text-center text-white'>Stay connected with us</h2>
-                    <form className='mx-5 py-3 '>
-                         <div className="form-control w-full my-5">
-                              <input type="email" placeholder="Email adress" className="input input-bordered w-full" />
+        
+          <section className="bg-white my-28 w-full ">
+                    <div className="grid gap-2  mx-auto lg:grid-cols-3">
+                         <div>
+                              <p className="font-medium text-blue-500 ">Contact us</p>
+
+                              <h1 className="mt-2 text-2xl font-semibold text-gray-800 md:text-3xl ">We’d love to hear from you</h1>
+
+                              <p className="mt-3 text-gray-500 ">Our support team is always here to help you.</p>
                          </div>
-                         <div className="form-control w-full my-5">
-                              <input type="text" placeholder="Subject" className="input input-bordered w-full" />
+
+                         <div className="grid grid-cols-1 gap-4 lg:col-span-2 sm:grid-cols-2 ">
+                              <div className="p-4 rounded-lg bg-blue-100 md:p-6 ">
+                                   <span className="inline-block p-3 text-blue-500 rounded-lg bg-blue-100/80 ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5">
+                                             <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                                        </svg>
+                                   </span>
+
+                                   <h2 className="mt-4 text-lg font-medium text-gray-800 ">Mail to support team</h2>
+                                   <p className="mt-2 text-sm text-gray-500 ">We are ready to check your mail.</p>
+                                   <a href='mailto:sheikhsadi1620@gmail.com' className="mt-2 text-sm text-blue-500 ">skdental@gmail.com</a>
+                              </div>
+
+                              <div className="p-4 rounded-lg bg-blue-100 md:p-6 ">
+                                   <span className="inline-block p-3 text-blue-500 rounded-lg bg-blue-100/80 ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5">
+                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                        </svg>
+                                   </span>
+
+                                   <h2 className="mt-4 text-lg font-medium text-gray-800 ">Chat to support</h2>
+                                   <p className="mt-2 text-sm text-gray-500 ">Our whatsapp support number</p>
+                                   <p className="mt-2 text-sm text-blue-500 ">+8801707778388</p>
+                              </div>
+
+                              <div className="p-4 rounded-lg bg-blue-100 md:p-6 ">
+                                   <span className="inline-block p-3 text-blue-500 rounded-lg bg-blue-100/80 ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5">
+                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                        </svg>
+                                   </span>
+
+                                   <h2 className="mt-4 text-lg font-medium text-gray-800 ">Visit us</h2>
+                                   <p className="mt-2 text-sm text-gray-500 ">Visit our officeroom</p>
+                                   <p className="mt-2 text-sm text-blue-500 ">Rampura, tv-center, Dhaka-1219</p>
+                              </div>
+
+                              <div className="p-4 rounded-lg bg-blue-100 md:p-6 ">
+                                   <span className="inline-block p-3 text-blue-500 rounded-lg bg-blue-100/80 ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5">
+                                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                                        </svg>
+                                   </span>
+
+                                   <h2 className="mt-4 text-lg font-medium text-gray-800 ">Call us</h2>
+                                   <p className="mt-2 text-sm text-gray-500 ">Anyday, 9am to 11pm.</p>
+                                   <p className="mt-2 text-sm text-blue-500 ">+8801882042233</p>
+                              </div>
                          </div>
-                         <div className="form-control">                              
-                              <textarea className="textarea textarea-bordered h-24" placeholder="Your message"></textarea>                              
-                         </div>
-                    </form>
-                    <div className='flex justify-center mt-2'><button className="btn btn-primary text-white bg-gradient-to-r from-primary to-secondary">send</button></div>
-               </div>
-          </div>
+                    </div>
+               </section>
      );
 };
 

@@ -83,7 +83,7 @@ const Login = () => {
             <p className="text-red-500 text-sm mt-1">{LoginError}</p>
           )}
           <label className="text-[10px] mt-1">
-            <a href="/" className="hover:underline">Forget password?</a>
+            <Link to={"/forgetPassword"} className="hover:underline">Forget password?</Link>
           </label>
         </div>
 

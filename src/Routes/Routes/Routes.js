@@ -13,6 +13,7 @@ import AdminRoute from "../adminRoute/adminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import About from "../../pages/Home/Information/About";
 import Contact from "../../pages/Home/Contact/Contact";
+import ForgetPassword from "../../pages/Login/ForgetPassword";
 
 export const router = createBrowserRouter([
      {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
                {
                     path: "/contact",
                     element: <Contact></Contact>
+               },
+               {
+                    path: "/forgetPassword",
+                    element: <ForgetPassword></ForgetPassword>
                }
           ]
      },
